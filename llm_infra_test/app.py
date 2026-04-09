@@ -64,6 +64,7 @@ class ChatRequest(BaseModel):
     use_tools: bool = False
     business_key: str = "chat"
     module: str = "test"
+    app_id: str = "123"
 
 
 # ============================================================================
@@ -73,7 +74,7 @@ class ChatRequest(BaseModel):
 @app.post("/chat")
 async def chat(req: ChatRequest):
     messages = [{"role": "user", "content": req.message}]
-    labels = {"module": req.module}
+    labels = {"app_id": req.app_id}
     tools = TOOL_DEFINITIONS if req.use_tools else None
     strategy = req.business_key if not req.stream else "chat"
 
