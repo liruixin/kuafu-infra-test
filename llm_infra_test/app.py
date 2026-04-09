@@ -37,8 +37,7 @@ llm_client = None
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global llm_client
-    config = load_yaml_config(str(PROJECT_ROOT / "config.yaml"))
-    llm_client = create_client(config)
+    llm_client = create_client(str(PROJECT_ROOT / "config.yaml"))
 
     yield
     await llm_client.shutdown()
