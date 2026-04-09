@@ -10,7 +10,7 @@ dependencies = [
     "fastapi>=0.110",
     "uvicorn>=0.29",
     "prometheus-client>=0.20",
-    "kuafu-llm-infra @ file:///Users/liruixin/private/code/kuafuai/kuafu-llm-infra",
+    "kuafu-llm-infra @ file:///data/lrx/infra/kuafu-llm-infra",
 ]
 
 [project.scripts]
