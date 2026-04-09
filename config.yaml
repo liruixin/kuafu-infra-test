@@ -1,0 +1,50 @@
+llm_stability:
+  providers:
+    openai-next:
+      api_key: "${LLM_API_KEY}"
+      endpoints:
+        openai:
+          base_url: "${LLM_BASE_URL}"
+
+  models:
+    gpt-4.1-2025-04-14:
+      providers:
+        - provider: openai-next
+          endpoint: openai
+          priority: 1
+          probe: true
+
+  strategies:
+    chat:
+      mode: stream
+      primary: gpt-4.1-2025-04-14
+      timeout:
+        ttft: 10
+        chunk_gap: 15
+        total: 120
+
+    chat_block:
+      mode: block
+      primary: gpt-4.1-2025-04-14
+      timeout:
+        total: 60
+
+  health_check:
+    interval: 30
+    failure_threshold: 3
+    timeout: 10
+
+  metrics:
+    enabled: true
+    backend: prometheus
+    port: 9091
+    label_keys: [module]
+
+  alert:
+    channels:
+      - type: log
+    rules:
+      silence_seconds: 60
+
+  state_backend:
+    type: memory
