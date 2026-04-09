@@ -1,7 +1,5 @@
 import json
 import os
-import signal
-import asyncio
 from contextlib import asynccontextmanager
 from typing import Optional
 
@@ -41,10 +39,6 @@ async def lifespan(app: FastAPI):
     global llm_client
     config = load_yaml_config(str(PROJECT_ROOT / "config.yaml"))
     llm_client = create_client(config)
-
-    loop = asyncio.get_event_loop()
-    for sig in (signal.SIGTERM, signal.SIGINT):
-        loop.add_signal_handler(sig, lambda: asyncio.create_task(llm_client.shutdown()))
 
     yield
     await llm_client.shutdown()
