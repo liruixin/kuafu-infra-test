@@ -7,7 +7,7 @@ llm_stability:
           base_url: "http://152.53.52.170:3003/v1"
 
   models:
-    gpt-4-1-2025-04-14:
+    gpt-4.1-2025-04-14:
       providers:
         - provider: openai-next
           endpoint: openai
@@ -17,7 +17,7 @@ llm_stability:
   strategies:
     chat:
       mode: stream
-      primary: gpt-4-1-2025-04-14
+      primary: gpt-4.1-2025-04-14
       timeout:
         ttft: 10
         chunk_gap: 15

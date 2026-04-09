@@ -70,7 +70,7 @@ async def chat(req: ChatRequest):
     messages = [{"role": "user", "content": req.message}]
     labels = {"app_id": req.app_id}
     tools = TOOL_DEFINITIONS if req.use_tools else None
-    strategy = req.business_key if not req.stream else "chat"
+    strategy = "chat" if req.stream else "chat_block"
 
     if req.stream:
         return StreamingResponse(
@@ -82,7 +82,7 @@ async def chat(req: ChatRequest):
     response = await llm_client.chat.completions.create(
         model=req.model,
         messages=messages,
-        business_key=strategy if not req.stream else "chat_block",
+        business_key=strategy,
         labels=labels,
         tools=tools,
         tool_choice="auto" if tools else None,
