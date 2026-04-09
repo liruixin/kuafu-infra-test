@@ -1,13 +1,13 @@
 llm_stability:
   providers:
     openai-next:
-      api_key: "${LLM_API_KEY}"
+      api_key: "sk-lq2AlzZ7R0QS1Rlq4fFeAb7e9dF34cC39eD8122848A46362"
       endpoints:
         openai:
-          base_url: "${LLM_BASE_URL}"
+          base_url: "http://152.53.52.170:3003/v1"
 
   models:
-    gpt-4.1-2025-04-14:
+    gpt-4-1-2025-04-14:
       providers:
         - provider: openai-next
           endpoint: openai
@@ -17,7 +17,7 @@ llm_stability:
   strategies:
     chat:
       mode: stream
-      primary: gpt-4.1-2025-04-14
+      primary: gpt-4-1-2025-04-14
       timeout:
         ttft: 10
         chunk_gap: 15
@@ -38,7 +38,7 @@ llm_stability:
     enabled: true
     backend: prometheus
     port: 9091
-    label_keys: [module]
+    label_keys: [app_id]
 
   alert:
     channels:
