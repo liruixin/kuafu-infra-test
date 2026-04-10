@@ -109,12 +109,6 @@ llm_stability:
           priority: 1
           probe: true
 
-    minimax-m2.7-highspeed:
-      providers:
-        - provider: openai-next
-          endpoint: openai
-          priority: 1
-          probe: true
 
     MiniMax-M2.7-highspeed:
       providers:
@@ -161,7 +155,7 @@ llm_stability:
         total: 120
 
     minimax-m2.7-highspeed:
-      primary: minimax-m2.7-highspeed
+      primary: MiniMax-M2.7-highspeed
       fallback:
         - glm-4-7-251222
         - MiniMax-M2.7-highspeed
