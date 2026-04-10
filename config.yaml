@@ -65,60 +65,12 @@ llm_stability:
           base_url: "https://api.minimaxi.com"
 
   models:
-    glm-4.7:
-      providers:
-        - provider: omnimaas
-          endpoint: openai
-          priority: 1
-          probe: true
-
-    deepseek/deepseek-v3.2:
-      providers:
-        - provider: ppio
-          endpoint: anthropic
-          priority: 1
-          probe: true
-
-    deepseek-chat:
-      providers:
-        - provider: dp
-          endpoint: openai
-          priority: 1
-          probe: true
-
     deepseek-v3-2-251201:
       providers:
         - provider: volces
           endpoint: openai
           priority: 1
           probe: true
-
-    deepseek-v3.2:
-      providers:
-        - provider: huawei
-          endpoint: openai
-          priority: 1
-          probe: true
-
-    gpt-4.1-mini-2025-04-14:
-      providers:
-        - provider: openai-next
-          endpoint: openai
-          priority: 1
-          probe: true
-        - provider: omnimaas
-          endpoint: openai
-          priority: 2
-
-    gpt-4.1-2025-04-14:
-      providers:
-        - provider: openai-next
-          endpoint: openai
-          priority: 1
-          probe: true
-        - provider: omnimaas
-          endpoint: openai
-          priority: 2
 
     claude-opus-4-5-20251101:
       providers:
@@ -136,73 +88,12 @@ llm_stability:
           model_id: claude-opus-4-6
           priority: 3
 
-    zai-org/glm-4.6:
-      providers:
-        - provider: ppio
-          endpoint: openai
-          priority: 1
-          probe: true
-
-    zai-org/glm-4.7:
-      providers:
-        - provider: ppio
-          endpoint: openai
-          priority: 1
-          probe: true
-
-    zai-org/glm-5:
-      providers:
-        - provider: ppio
-          endpoint: openai
-          priority: 1
-          probe: true
-
-    gpt-4o-mini-2024-07-18:
-      providers:
-        - provider: openai-next
-          endpoint: openai
-          priority: 1
-          probe: true
-        - provider: omnimaas
-          endpoint: openai
-          priority: 2
-
     glm-4-7-251222:
       providers:
         - provider: volces
           endpoint: openai
           priority: 1
           probe: true
-
-    gpt-5-mini-2025-08-07:
-      providers:
-        - provider: openai-next
-          endpoint: openai
-          priority: 1
-          probe: true
-        - provider: omnimaas
-          endpoint: openai
-          priority: 2
-
-    gpt-5.2-2025-12-11:
-      providers:
-        - provider: openai-next
-          endpoint: openai
-          priority: 1
-          probe: true
-        - provider: omnimaas
-          endpoint: openai
-          priority: 2
-
-    gpt-5-nano-2025-08-07:
-      providers:
-        - provider: openai-next
-          endpoint: openai
-          priority: 1
-          probe: true
-        - provider: omnimaas
-          endpoint: openai
-          priority: 2
 
     claude-opus-4-6:
       providers:
@@ -239,19 +130,7 @@ llm_stability:
           priority: 1
           probe: true
 
-    gpt-5.3-codex:
-      providers:
-        - provider: openai-next
-          endpoint: openai
-          priority: 1
-          probe: true
 
-    claude-sonnet-4-6:
-      providers:
-        - provider: openai-next
-          endpoint: anthropic
-          priority: 1
-          probe: true
 
   strategies:
     claude-opus-4-5-20251101:
