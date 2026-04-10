@@ -52,7 +52,7 @@ app = FastAPI(title="llm-infra-test", lifespan=lifespan)
 
 class ChatRequest(BaseModel):
     message: str
-    model: Optional[str] = None
+    model: str
     stream: bool = False
     use_tools: bool = False
     business_key: str = "chat"
@@ -69,7 +69,7 @@ async def chat(req: ChatRequest):
     messages = [{"role": "user", "content": req.message}]
     labels = {"app_id": req.app_id}
     tools = TOOL_DEFINITIONS if req.use_tools else None
-    strategy = "chat" if req.stream else "chat_block"
+    strategy = req.model
 
     if req.stream:
         return StreamingResponse(
@@ -97,7 +97,7 @@ async def chat(req: ChatRequest):
         response = await llm_client.chat.completions.create(
             model=req.model,
             messages=messages,
-            business_key="chat_block",
+            business_key=req.model,
             labels=labels,
         )
 
@@ -113,7 +113,7 @@ async def _stream_chat(messages, model, labels, tools):
         model=model,
         messages=messages,
         stream=True,
-        business_key="chat",
+        business_key=req.model,
         labels=labels,
         tools=tools,
         tool_choice="auto" if tools else None,

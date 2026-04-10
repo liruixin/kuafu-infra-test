@@ -5,29 +5,292 @@ llm_stability:
       endpoints:
         openai:
           base_url: "http://152.53.52.170:3003/v1"
+        anthropic:
+          base_url: "http://152.53.52.170:3003"
+
+    ppio:
+      api_key: "sk_X3hlaxVt_Cuva-7DEMuT0fYwX4qgOF-Lwq2PlU2ioM4"
+      endpoints:
+        openai:
+          base_url: "https://api.ppinfra.com/openai/v1"
+        anthropic:
+          base_url: "https://api.ppinfra.com/anthropic"
+
+    dp:
+      api_key: "sk-da414e32ec1541efae93cac2e28ea634"
+      endpoints:
+        openai:
+          base_url: "https://api.deepseek.com/v1"
+        anthropic:
+          base_url: "https://api.deepseek.com/anthropic"
+
+    volces:
+      api_key: "76db9562-1da8-457c-bc67-1c1a9f35931f"
+      endpoints:
+        openai:
+          base_url: "https://ark.cn-beijing.volces.com/api/v3"
+        anthropic:
+          base_url: "https://ark.cn-beijing.volces.com/api/v3"
+
+    huawei:
+      api_key: "f32mX0Q1LfruDNpNWWZkeySYpmfn65u1hglmCgtZ7s93S5jWkX5-A9n6Xyd8d60GuSrjYFrTiupAbtf2kRxb7A"
+      endpoints:
+        openai:
+          base_url: "https://api.modelarts-maas.com/v2"
+        anthropic:
+          base_url: "https://api.modelarts-maas.com/v2"
+
+    omnimaas:
+      api_key: "sk-mFxL0t3VcvzfFJijBdwS0RmE2qeRdKDyTV6jg8KRX0A"
+      endpoints:
+        openai:
+          base_url: "http://18.136.201.255:3000/v1"
+        anthropic:
+          base_url: "http://18.136.201.255:3000"
+
+    nex-agi:
+      api_key: "sk-CIlWdMuO3U8nxyYvi2ozEDYiMxCi03tFSOZ1f4CveqJiWXn5"
+      endpoints:
+        openai:
+          base_url: "http://14.103.60.158:13000/v1"
+        anthropic:
+          base_url: "http://14.103.60.158:13000"
+
+    mini-max:
+      api_key: "sk-api--NCMNhSLW0WX9Q31sYE5bu0G4abnQbU6Ao1COvSbAZNc8pTdEKsHQHGtZWi_elshkcknZZOacTc9Hc_aHN0LRQKDRlM00n4UJian0Cy3RpSpKoranZqtL9U"
+      endpoints:
+        openai:
+          base_url: "https://api.minimaxi.com/v1"
+        anthropic:
+          base_url: "https://api.minimaxi.com"
 
   models:
+    glm-4.7:
+      providers:
+        - provider: omnimaas
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    deepseek/deepseek-v3.2:
+      providers:
+        - provider: ppio
+          endpoint: anthropic
+          priority: 1
+          probe: true
+
+    deepseek-chat:
+      providers:
+        - provider: dp
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    deepseek-v3-2-251201:
+      providers:
+        - provider: volces
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    deepseek-v3.2:
+      providers:
+        - provider: huawei
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    gpt-4.1-mini-2025-04-14:
+      providers:
+        - provider: openai-next
+          endpoint: openai
+          priority: 1
+          probe: true
+        - provider: omnimaas
+          endpoint: openai
+          priority: 2
+
     gpt-4.1-2025-04-14:
       providers:
         - provider: openai-next
           endpoint: openai
           priority: 1
           probe: true
+        - provider: omnimaas
+          endpoint: openai
+          priority: 2
+
+    claude-opus-4-5-20251101:
+      providers:
+        - provider: openai-next
+          endpoint: anthropic
+          model_id: claude-opus-4-6
+          priority: 1
+          probe: true
+        - provider: ppio
+          endpoint: anthropic
+          model_id: pa/claude-opus-4-5-20251101
+          priority: 2
+        - provider: omnimaas
+          endpoint: anthropic
+          model_id: claude-opus-4-6
+          priority: 3
+
+    zai-org/glm-4.6:
+      providers:
+        - provider: ppio
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    zai-org/glm-4.7:
+      providers:
+        - provider: ppio
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    zai-org/glm-5:
+      providers:
+        - provider: ppio
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    gpt-4o-mini-2024-07-18:
+      providers:
+        - provider: openai-next
+          endpoint: openai
+          priority: 1
+          probe: true
+        - provider: omnimaas
+          endpoint: openai
+          priority: 2
+
+    glm-4-7-251222:
+      providers:
+        - provider: volces
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    gpt-5-mini-2025-08-07:
+      providers:
+        - provider: openai-next
+          endpoint: openai
+          priority: 1
+          probe: true
+        - provider: omnimaas
+          endpoint: openai
+          priority: 2
+
+    gpt-5.2-2025-12-11:
+      providers:
+        - provider: openai-next
+          endpoint: openai
+          priority: 1
+          probe: true
+        - provider: omnimaas
+          endpoint: openai
+          priority: 2
+
+    gpt-5-nano-2025-08-07:
+      providers:
+        - provider: openai-next
+          endpoint: openai
+          priority: 1
+          probe: true
+        - provider: omnimaas
+          endpoint: openai
+          priority: 2
+
+    claude-opus-4-6:
+      providers:
+        - provider: omnimaas
+          endpoint: anthropic
+          priority: 1
+          probe: true
+
+    glm-5:
+      providers:
+        - provider: omnimaas
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    minimax-m2.7-highspeed:
+      providers:
+        - provider: openai-next
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    MiniMax-M2.7-highspeed:
+      providers:
+        - provider: mini-max
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    minimax/minimax-m2.7:
+      providers:
+        - provider: ppio
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    gpt-5.3-codex:
+      providers:
+        - provider: openai-next
+          endpoint: openai
+          priority: 1
+          probe: true
+
+    claude-sonnet-4-6:
+      providers:
+        - provider: openai-next
+          endpoint: anthropic
+          priority: 1
+          probe: true
 
   strategies:
-    chat:
-      mode: stream
-      primary: gpt-4.1-2025-04-14
+    claude-opus-4-5-20251101:
+      primary: claude-opus-4-5-20251101
+      fallback:
+        - deepseek-v3-2-251201
       timeout:
         ttft: 10
         chunk_gap: 15
         total: 120
 
-    chat_block:
-      mode: block
-      primary: gpt-4.1-2025-04-14
+    claude-opus-4-6:
+      primary: claude-opus-4-6
+      fallback:
+        - deepseek-v3-2-251201
       timeout:
-        total: 60
+        ttft: 10
+        chunk_gap: 15
+        total: 120
+
+    glm-5:
+      primary: glm-5
+      fallback:
+        - glm-4-7-251222
+      timeout:
+        ttft: 10
+        chunk_gap: 15
+        total: 120
+
+    minimax-m2.7-highspeed:
+      primary: minimax-m2.7-highspeed
+      fallback:
+        - glm-4-7-251222
+        - MiniMax-M2.7-highspeed
+        - minimax/minimax-m2.7
+      timeout:
+        ttft: 10
+        chunk_gap: 15
+        total: 120
 
   health_check:
     interval: 30
