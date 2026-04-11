@@ -16,14 +16,6 @@ llm_stability:
         anthropic:
           base_url: "https://api.ppinfra.com/anthropic"
 
-    dp:
-      api_key: "sk-da414e32ec1541efae93cac2e28ea634"
-      endpoints:
-        openai:
-          base_url: "https://api.deepseek.com/v1"
-        anthropic:
-          base_url: "https://api.deepseek.com/anthropic"
-
     volces:
       api_key: "76db9562-1da8-457c-bc67-1c1a9f35931f"
       endpoints:
@@ -32,14 +24,6 @@ llm_stability:
         anthropic:
           base_url: "https://ark.cn-beijing.volces.com/api/v3"
 
-    huawei:
-      api_key: "f32mX0Q1LfruDNpNWWZkeySYpmfn65u1hglmCgtZ7s93S5jWkX5-A9n6Xyd8d60GuSrjYFrTiupAbtf2kRxb7A"
-      endpoints:
-        openai:
-          base_url: "https://api.modelarts-maas.com/v2"
-        anthropic:
-          base_url: "https://api.modelarts-maas.com/v2"
-
     omnimaas:
       api_key: "sk-mFxL0t3VcvzfFJijBdwS0RmE2qeRdKDyTV6jg8KRX0A"
       endpoints:
@@ -47,14 +31,6 @@ llm_stability:
           base_url: "http://18.136.201.255:3000/v1"
         anthropic:
           base_url: "http://18.136.201.255:3000"
-
-    nex-agi:
-      api_key: "sk-CIlWdMuO3U8nxyYvi2ozEDYiMxCi03tFSOZ1f4CveqJiWXn5"
-      endpoints:
-        openai:
-          base_url: "http://14.103.60.158:13000/v1"
-        anthropic:
-          base_url: "http://14.103.60.158:13000"
 
     mini-max:
       api_key: "sk-api--NCMNhSLW0WX9Q31sYE5bu0G4abnQbU6Ao1COvSbAZNc8pTdEKsHQHGtZWi_elshkcknZZOacTc9Hc_aHN0LRQKDRlM00n4UJian0Cy3RpSpKoranZqtL9U"
@@ -83,10 +59,12 @@ llm_stability:
           endpoint: anthropic
           model_id: pa/claude-opus-4-5-20251101
           priority: 2
+          probe: true
         - provider: omnimaas
           endpoint: anthropic
           model_id: claude-opus-4-6
           priority: 3
+          probe: true
 
     glm-4-7-251222:
       providers:
@@ -109,7 +87,6 @@ llm_stability:
           priority: 1
           probe: true
 
-
     MiniMax-M2.7-highspeed:
       providers:
         - provider: mini-max
@@ -124,8 +101,6 @@ llm_stability:
           priority: 1
           probe: true
 
-
-
   strategies:
     claude-opus-4-5-20251101:
       primary: claude-opus-4-5-20251101
@@ -134,7 +109,8 @@ llm_stability:
       timeout:
         ttft: 10
         chunk_gap: 15
-        total: 120
+        per_request: 120
+        total: 180
 
     claude-opus-4-6:
       primary: claude-opus-4-6
@@ -143,7 +119,8 @@ llm_stability:
       timeout:
         ttft: 10
         chunk_gap: 15
-        total: 120
+        per_request: 120
+        total: 180
 
     glm-5:
       primary: glm-5
@@ -152,18 +129,19 @@ llm_stability:
       timeout:
         ttft: 10
         chunk_gap: 15
-        total: 120
+        per_request: 120
+        total: 180
 
     minimax-m2.7-highspeed:
       primary: MiniMax-M2.7-highspeed
       fallback:
         - glm-4-7-251222
-        - MiniMax-M2.7-highspeed
         - minimax/minimax-m2.7
       timeout:
         ttft: 10
         chunk_gap: 15
-        total: 120
+        per_request: 120
+        total: 180
 
   health_check:
     interval: 30
@@ -174,7 +152,7 @@ llm_stability:
     enabled: true
     backend: prometheus
     port: 9091
-    label_keys: [app_id]
+    label_keys: [app_id, cache_token]
 
   alert:
     channels:
