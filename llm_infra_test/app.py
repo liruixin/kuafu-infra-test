@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 from contextlib import asynccontextmanager
 from typing import Optional
@@ -10,8 +11,11 @@ from pydantic import BaseModel
 
 from pathlib import Path
 
-from kuafu_llm_infra import create_client
+from kuafu_llm_infra import create_client, setup_logging
 from llm_infra_test.tools import TOOL_DEFINITIONS, TOOL_EXECUTORS
+
+# 日志配置：按职责分文件，控制台只看 INFO+
+setup_logging(log_dir=str(Path(__file__).resolve().parent.parent / "logs"))
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -69,7 +73,6 @@ async def chat(req: ChatRequest):
     messages = [{"role": "user", "content": req.message}]
     labels = {"app_id": req.app_id}
     tools = TOOL_DEFINITIONS if req.use_tools else None
-    strategy = req.model
 
     if req.stream:
         return StreamingResponse(
@@ -79,9 +82,8 @@ async def chat(req: ChatRequest):
 
     # Non-streaming
     response = await llm_client.chat.completions.create(
-        model=req.model,
         messages=messages,
-        business_key=strategy,
+        business_key=req.model,
         labels=labels,
         tools=tools,
         tool_choice="auto" if tools else None,
@@ -95,7 +97,6 @@ async def chat(req: ChatRequest):
             messages.append(tr)
 
         response = await llm_client.chat.completions.create(
-            model=req.model,
             messages=messages,
             business_key=req.model,
             labels=labels,
@@ -110,10 +111,9 @@ async def chat(req: ChatRequest):
 
 async def _stream_chat(messages, model, labels, tools):
     stream = await llm_client.chat.completions.create(
-        model=model,
         messages=messages,
         stream=True,
-        business_key=req.model,
+        business_key=model,
         labels=labels,
         tools=tools,
         tool_choice="auto" if tools else None,
