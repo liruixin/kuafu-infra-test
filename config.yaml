@@ -147,7 +147,7 @@ llm_stability:
     interval: 30
     failure_threshold: 3
     timeout: 10
-    probe_max_tokens: 8000
+    probe_max_tokens: 16000
 
   metrics:
     enabled: true
